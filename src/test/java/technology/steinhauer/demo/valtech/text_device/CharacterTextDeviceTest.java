@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.io.*;
 
 /**
- * Created by hsteinhauer on 07.06.14.
+ * Unit tests needed for CharacterTextDevice implementation.
  */
 public class CharacterTextDeviceTest {
 
@@ -45,7 +45,7 @@ public class CharacterTextDeviceTest {
         int numberToFormat = 42;
         String expectedOutput = "00042";
 
-        device.format(format, numberToFormat);
+        device.printf(format, numberToFormat);
 
         Assert.assertEquals(expectedOutput, stringWriter.toString());
     }
@@ -56,5 +56,11 @@ public class CharacterTextDeviceTest {
         Assert.assertEquals(STRING_READER_VALUE, actualValue);
     }
 
+    @Test
+    public void readALineWithPrompt () throws IOException {
+        device.readLine("> ");
+        String actualValue = stringWriter.getBuffer().toString();
+        Assert.assertEquals("> ", actualValue);
+    }
 
 }

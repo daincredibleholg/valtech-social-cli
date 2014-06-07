@@ -26,11 +26,19 @@ public class CharacterTextDevice implements TextDevice {
         return writer;
     }
 
-    public void format(String format, Object... values) {
+    public void printf(String format, Object... values) {
         writer.printf(format, values);
+        writer.flush();
     }
 
     public String readLine() throws IOException {
         return reader.readLine();
+    }
+
+    @Override
+    public String readLine(String prompt) throws IOException {
+        String format = "%s";
+        printf(format, prompt);
+        return readLine();
     }
 }

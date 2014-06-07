@@ -40,12 +40,17 @@ public class ConsoleTextDevice implements TextDevice {
     }
 
     @Override
-    public void format(String format, Object... values) {
+    public void printf(String format, Object... values) {
         console.printf(format, values);
     }
 
     @Override
     public String readLine() throws IOException {
         return console.readLine();
+    }
+
+    @Override
+    public String readLine(String prompt) throws IOException {
+        return console.readLine(prompt);
     }
 }

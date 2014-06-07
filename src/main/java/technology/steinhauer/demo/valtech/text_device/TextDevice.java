@@ -32,7 +32,7 @@ public interface TextDevice {
      * @param format Format instructions for the given values
      * @param numberToFormat Values to format and print
      */
-    void format(String format, Object... values);
+    void printf(String format, Object... values);
 
     /**
      * Waits for an input - usually some kind of user input - and
@@ -42,4 +42,6 @@ public interface TextDevice {
      * @throws IOException Thrown if any error during the input occurs.
      */
     String readLine() throws IOException;
+
+    String readLine(String prompt) throws IOException;
 }
