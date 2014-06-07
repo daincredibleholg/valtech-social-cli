@@ -13,6 +13,10 @@ public class SocialShell {
 
     private static final String PROMPT = "> ";
 
+    private static final String COMMAND_POSTING = "->";
+    private static final String COMMAND_FOLLOWS = "follows";
+    private static final String COMMAND_SHOW_WALL = "wall";
+
     public static void main(String... args) {
         SocialShell shell = new SocialShell();
         shell.start();
@@ -44,31 +48,46 @@ public class SocialShell {
 
             if (!scanner.hasNext()) {
                 //TODO
-                device.writer().println(userOrQuitCommand + " timelime requested");
+                device.writer().println(userOrQuitCommand + " timeline requested");
             } else {
                 String option = scanner.next();
 
-                String restOfCommand = "";
-                if (scanner.hasNext()) {
-                     restOfCommand = command.substring(userOrQuitCommand.length() + option.length() + 2);
-                }
-
                 switch (option) {
-                    case "->": {
-                        System.out.println("Posting, content: [" + restOfCommand + "]");
+                    case COMMAND_POSTING: {
+                        String message = getPostMessage(scanner, command, userOrQuitCommand);
+                        System.out.println("Posting, content: [" + message+ "]");
                         break;
                     }
-                    case "follows": {
-                        System.out.println(userOrQuitCommand + " follows " + restOfCommand + "now");
+                    case COMMAND_FOLLOWS: {
+                        String follow = getFollowUserName(scanner);
+                        System.out.println(userOrQuitCommand + " follows " + follow + " now");
                         break;
                     }
-                    case "wall": {
+                    case COMMAND_SHOW_WALL: {
                         System.out.println(userOrQuitCommand + "'s wall requested");
                         break;
                     }
                 }
             }
         }
+    }
+
+    private String getPostMessage(Scanner scanner, String command, String username) {
+        final int numberOfUsedSeparators = 2;
+        String message = "";
+        if (scanner.hasNext()) {
+            message = command.substring(username.length() + COMMAND_POSTING.length() + numberOfUsedSeparators);
+        }
+        return message;
+    }
+
+    private String getFollowUserName(Scanner scanner) {
+        String follow = "";
+        if (scanner.hasNext()) {
+            follow = scanner.next();
+        }
+
+        return follow;
     }
 
     private void quitIfRequested(String command) {
