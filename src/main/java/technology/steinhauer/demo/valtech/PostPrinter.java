@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by hsteinhauer on 08.06.14.
+ * This class holds the logic to print posts either in the context of a timeline or a wall.
  */
 public class PostPrinter {
     private static TextDevice textDevice;

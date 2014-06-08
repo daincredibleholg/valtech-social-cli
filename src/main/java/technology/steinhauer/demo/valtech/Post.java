@@ -1,7 +1,5 @@
 package technology.steinhauer.demo.valtech;
 
-import org.ocpsoft.prettytime.PrettyTime;
-
 import java.util.Date;
 
 /**
