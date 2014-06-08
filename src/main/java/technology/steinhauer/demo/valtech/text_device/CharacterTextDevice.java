@@ -41,4 +41,9 @@ public class CharacterTextDevice implements TextDevice {
         printf(format, prompt);
         return readLine();
     }
+
+    @Override
+    public void println(String s) {
+        writer().println(s);
+    }
 }

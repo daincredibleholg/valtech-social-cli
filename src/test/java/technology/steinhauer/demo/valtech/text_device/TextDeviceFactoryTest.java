@@ -23,4 +23,11 @@ public class TextDeviceFactoryTest {
         Assert.assertTrue(textDevice instanceof CharacterTextDevice);
     }
 
+    @Test
+    public void checkInstanceIsOnlyCreatedOnce () throws Exception {
+        TextDevice textDevice1 = TextDeviceFactory.createTextDevice();
+        TextDevice textDevice2 = TextDeviceFactory.createTextDevice();
+
+        Assert.assertTrue(textDevice1 == textDevice2);
+    }
 }
