@@ -33,17 +33,11 @@ public class Post {
 
     @Override
     public String toString() {
-        PrettyTime timeBeautifier = new PrettyTime();
-
-        StringBuilder output = new StringBuilder();
-        output.append(username)
-                .append(" - ")
-                .append(message)
-                .append(" (")
-                .append(timeBeautifier.format(date))
-                .append(")");
-
-        return output.toString();
+        return "Post{" +
+                "username='" + username + '\'' +
+                ", message='" + message + '\'' +
+                ", date=" + date +
+                '}';
     }
 
     @Override

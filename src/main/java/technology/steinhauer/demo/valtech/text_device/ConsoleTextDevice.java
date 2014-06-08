@@ -55,5 +55,6 @@ public class ConsoleTextDevice implements TextDevice {
     @Override
     public void println(String s) {
         console.writer().println(s);
+        console.writer().flush();
     }
 }

@@ -24,7 +24,6 @@ public class TextDeviceFactory {
         }
 
         Console console = System.console();
-        TextDevice device;
 
         if (console == null) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
