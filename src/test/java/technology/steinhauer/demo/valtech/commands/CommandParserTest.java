@@ -39,5 +39,27 @@ public class CommandParserTest {
         Assert.assertEquals(expectedUsername, actualUsername);
     }
 
-    
+    @Test
+    public void postMessage() {
+        String username = "username";
+        String message = "demo";
+        String command = username + " -> " + message;
+        Command expectedCommand = new PostCommand(username, message);
+
+        Command actualCommand = CommandParser.parse(command);
+
+        Assert.assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void postAnotherMessage () {
+        String username = "otheruser";
+        String message = "othermessage";
+        String command = username + " -> " + message;
+        Command expectedCommand = new PostCommand(username, message);
+
+        Command actualCommand = CommandParser.parse(command);
+
+        Assert.assertEquals(expectedCommand, actualCommand);
+    }
 }
