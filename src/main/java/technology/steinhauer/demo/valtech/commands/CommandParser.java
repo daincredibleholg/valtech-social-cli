@@ -27,7 +27,7 @@ public class CommandParser {
             firstCommand = commandScanner.next();
         } else {
             // empty line - nothing to do
-            return null;
+            return new UnknownCommand();
         }
 
         if (firstCommand.equals("quit")) {
@@ -49,7 +49,7 @@ public class CommandParser {
                     break;
                 }
                 default: {
-                    result = null;
+                    result = new UnknownCommand();
                 }
             }
         } else {

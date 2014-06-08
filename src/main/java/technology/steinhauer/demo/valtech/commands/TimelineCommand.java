@@ -9,4 +9,8 @@ public class TimelineCommand extends Command {
         this.username = username;
     }
 
+    @Override
+    public void execute() {
+
+    }
 }

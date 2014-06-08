@@ -16,4 +16,6 @@ public abstract class Command {
         return date;
     }
 
+    public abstract void execute();
+
 }

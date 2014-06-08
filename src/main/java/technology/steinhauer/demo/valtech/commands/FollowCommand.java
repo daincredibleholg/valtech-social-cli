@@ -31,4 +31,9 @@ public class FollowCommand extends Command {
         result = 31 * result + username.hashCode();
         return result;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

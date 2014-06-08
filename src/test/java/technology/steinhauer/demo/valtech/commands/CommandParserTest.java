@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by hsteinhauer on 08.06.14.
+ * Tests the functions of CommandParser class.
  */
 public class CommandParserTest {
 
@@ -57,5 +57,15 @@ public class CommandParserTest {
         Command actualCommand = CommandParser.parse(command);
 
         Assert.assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void unknownCommand() {
+        String command = "";
+        Command actualCommand = CommandParser.parse(command);
+
+        // there is nothing we can compare two different instances of UnknownCommand - the type is the only thing
+        // that's really important.
+        Assert.assertTrue(actualCommand instanceof UnknownCommand);
     }
 }

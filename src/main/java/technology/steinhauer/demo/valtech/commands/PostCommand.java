@@ -41,4 +41,8 @@ public class PostCommand extends Command {
         return result;
     }
 
+    @Override
+    public void execute() {
+
+    }
 }

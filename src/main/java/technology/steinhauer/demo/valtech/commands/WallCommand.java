@@ -26,4 +26,9 @@ public class WallCommand extends Command {
     public int hashCode() {
         return username.hashCode();
     }
+
+    @Override
+    public void execute() {
+
+    }
 }
