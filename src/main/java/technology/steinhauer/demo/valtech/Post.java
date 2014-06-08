@@ -1,5 +1,7 @@
 package technology.steinhauer.demo.valtech;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
 import java.util.Date;
 
 /**
@@ -27,6 +29,21 @@ public class Post {
 
     public Date getDate() {
         return date;
+    }
+
+    @Override
+    public String toString() {
+        PrettyTime timeBeautifier = new PrettyTime();
+
+        StringBuilder output = new StringBuilder();
+        output.append(username)
+                .append(" - ")
+                .append(message)
+                .append(" (")
+                .append(timeBeautifier.format(date))
+                .append(")");
+
+        return output.toString();
     }
 
     @Override

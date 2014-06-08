@@ -63,4 +63,13 @@ public class CharacterTextDeviceTest {
         Assert.assertEquals("> ", actualValue);
     }
 
+    @Test
+    public void printTwoLines() {
+        device.println("Line 1");
+        device.println("Line 2");
+
+        String expectedValue = "Line 1\nLine 2\n";
+        String actualValue = stringWriter.getBuffer().toString();
+        Assert.assertEquals(expectedValue, actualValue);
+    }
 }

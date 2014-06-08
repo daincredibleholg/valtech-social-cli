@@ -9,12 +9,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by hsteinhauer on 08.06.14.
+ * This collection of tests is meant to check the TimelineService is working correctly.
  */
 public class TimelineTest {
 
     @Before
-    public void resetTimelines () {
+    public void resetTimelines() {
         TimelineService.reset();
     }
 
@@ -28,7 +28,7 @@ public class TimelineTest {
     }
 
     @Test
-    public void addPostToTimeline () {
+    public void addPostToTimeline() {
         String username = "Alice";
         String message = "I love the weather today";
         Date postDate = new Date();
@@ -56,6 +56,6 @@ public class TimelineTest {
         Post actualPost = userPosts.get(0);
 
         Assert.assertEquals(expectedPost, actualPost);
-
     }
+
 }

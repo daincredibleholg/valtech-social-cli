@@ -44,4 +44,6 @@ public interface TextDevice {
     String readLine() throws IOException;
 
     String readLine(String prompt) throws IOException;
+
+    void println(String s);
 }

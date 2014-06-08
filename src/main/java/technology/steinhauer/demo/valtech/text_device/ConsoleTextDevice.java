@@ -51,4 +51,9 @@ public class ConsoleTextDevice implements TextDevice {
     public String readLine(String prompt) throws IOException {
         return console.readLine(prompt);
     }
+
+    @Override
+    public void println(String s) {
+        console.writer().println(s);
+    }
 }
