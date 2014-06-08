@@ -1,7 +1,5 @@
 package technology.steinhauer.demo.valtech.text_device;
 
-import sun.reflect.annotation.ExceptionProxy;
-
 import java.io.Console;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +21,7 @@ public class ConsoleTextDevice implements TextDevice {
         checkConsoleIsNotNull();
     }
 
-    private void checkConsoleIsNotNull () throws Exception {
+    private void checkConsoleIsNotNull() throws Exception {
         if (this.console == null) {
             throw new Exception("No Console available");
         }

@@ -3,26 +3,32 @@ package technology.steinhauer.demo.valtech.commands;
 import java.util.Date;
 
 /**
- * Created by hsteinhauer on 08.06.14.
+ * Represents post command to a users timeline
  */
 public class PostCommand extends Command {
+
+    private final String message;
+
     public PostCommand(String username, String message) {
         this.username = username;
         this.message = message;
         this.date = new Date();
     }
 
+    public String getMessage() {
+        return message;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Command command = (Command) o;
+        PostCommand that = (PostCommand) o;
 
-        if (date != null ? !date.equals(command.date) : command.date != null) return false;
-        if (message != null ? !message.equals(command.message) : command.message != null) return false;
-        if (!username.equals(command.username)) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (message != null ? !message.equals(that.message) : that.message != null) return false;
+        if (!username.equals(that.username)) return false;
 
         return true;
     }

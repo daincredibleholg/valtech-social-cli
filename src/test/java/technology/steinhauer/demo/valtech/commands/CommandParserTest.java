@@ -16,23 +16,8 @@ public class CommandParserTest {
     }
 
     @Test
-    public void usernameOnlyProducesTimelineCommand () {
-        Command actual = CommandParser.parse("username");
-
-        Assert.assertTrue(actual instanceof TimelineCommand);
-    }
-    @Test
     public void showUserTimeline () {
         String expectedUsername = "username";
-        Command actual = CommandParser.parse(expectedUsername);
-
-        String actualUsername = actual.getUsername();
-        Assert.assertEquals(expectedUsername, actualUsername);
-    }
-
-    @Test
-    public void showOtherUsersTimeline() {
-        String expectedUsername = "otheruser";
         Command actual = CommandParser.parse(expectedUsername);
 
         String actualUsername = actual.getUsername();
@@ -44,7 +29,7 @@ public class CommandParserTest {
         String username = "username";
         String message = "demo";
         String command = username + " -> " + message;
-        Command expectedCommand = new PostCommand(username, message);
+        PostCommand expectedCommand = new PostCommand(username, message);
 
         Command actualCommand = CommandParser.parse(command);
 
@@ -52,11 +37,22 @@ public class CommandParserTest {
     }
 
     @Test
-    public void postAnotherMessage () {
-        String username = "otheruser";
-        String message = "othermessage";
-        String command = username + " -> " + message;
-        Command expectedCommand = new PostCommand(username, message);
+    public void followUser () {
+        String username = "Charlie";
+        String follow = "Alice";
+        String command = username + " follows " + follow;
+        Command expectedCommand = new FollowCommand(username, follow);
+
+        Command actualCommand = CommandParser.parse(command);
+
+        Assert.assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void showUserWall () {
+        String username = "Charlie";
+        String command = username + " wall";
+        Command expectedCommand = new WallCommand(username);
 
         Command actualCommand = CommandParser.parse(command);
 

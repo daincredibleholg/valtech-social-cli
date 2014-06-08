@@ -7,17 +7,11 @@ import java.util.Date;
  */
 public abstract class Command {
     protected String username = "";
-    protected String message;
     protected Date date;
 
     public String getUsername() {
         return this.username;
     }
-
-    public String getMessage() {
-        return this.message;
-    }
-
     public Date getDate() {
         return date;
     }
