@@ -6,6 +6,7 @@ import org.ocpsoft.prettytime.units.Millisecond;
 import technology.steinhauer.demo.valtech.text_device.TextDevice;
 import technology.steinhauer.demo.valtech.text_device.TextDeviceFactory;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,6 +40,9 @@ public class PostPrinter {
         final PrettyTime prettyTime = getPrettyTimeInstance();
 
         List<Post> userTimeline = TimelineService.getUserTimeline(username);
+
+        // we want the posts in descending order, so we simply reverse it
+        Collections.reverse(userTimeline);
 
         for (Post post : userTimeline) {
             getTextDevice().printf(format, post.getMessage(), prettyTime.format(post.getDate()));

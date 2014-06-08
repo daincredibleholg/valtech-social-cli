@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import technology.steinhauer.demo.valtech.text_device.CharacterTextDevice;
 import technology.steinhauer.demo.valtech.text_device.TextDevice;
-import technology.steinhauer.demo.valtech.text_device.TextDeviceFactory;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
@@ -14,26 +13,26 @@ import java.io.StringWriter;
 import java.util.Date;
 
 /**
- * Created by hsteinhauer on 08.06.14.
+ * Tests the PostPrinter utility
  */
 public class PostPrinterTest {
 
+    private StringWriter stringWriter;
+
+
     /**
-     * Resets the PostPrinter before each test
+     * Resets the PostPrinter and TimelineService before each test
      */
     @Before
-    public void setUp () {
+    public void setUp() {
         PostPrinter.setTextDevice(null);
+        TimelineService.reset();
     }
 
     @Test
     public void testTimelineOutput() throws Exception {
         // Prepare text device for test
-        StringReader stringReader = new StringReader("demo");
-        BufferedReader reader = new BufferedReader(stringReader);
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        CharacterTextDevice device = new CharacterTextDevice(reader, writer);
+        TextDevice device = getTextDeviceForTest();
         PostPrinter.setTextDevice(device);
 
         // Prepare post and "post it"
@@ -56,5 +55,40 @@ public class PostPrinterTest {
         TextDevice actualDevice = PostPrinter.getTextDevice();
 
         Assert.assertNotNull(actualDevice);
+    }
+
+    @Test
+    public void postsAreShownInReverseOrder() {
+        // Prepare text device for test
+        TextDevice device = getTextDeviceForTest();
+        PostPrinter.setTextDevice(device);
+
+        // Prepare posts and "post them"
+        String username = "Bob";
+        String firstMessage = "Oh, we lost!";
+        Date firstPostDate = new Date();
+        Post post = new Post(username, firstMessage, firstPostDate);
+        TimelineService.addPost(post);
+
+        String secondMessage = "at least it's sunny";
+        Date secondPostDate = new Date();
+        post = new Post(username, secondMessage, secondPostDate);
+        TimelineService.addPost(post);
+
+        PostPrinter.printTimeline(username);
+
+        String expectedValue = secondMessage + " (1 second ago)\n";
+        expectedValue += firstMessage + " (1 second ago)\n";
+        String actualValue = stringWriter.getBuffer().toString();
+        Assert.assertEquals(expectedValue, actualValue);
+
+    }
+
+    private TextDevice getTextDeviceForTest() {
+        StringReader stringReader = new StringReader("demo");
+        BufferedReader reader = new BufferedReader(stringReader);
+        stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter);
+        return new CharacterTextDevice(reader, writer);
     }
 }
