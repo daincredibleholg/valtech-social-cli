@@ -14,4 +14,30 @@ public class CommandParserTest {
 
         Assert.assertTrue(actual instanceof QuitCommand);
     }
+
+    @Test
+    public void usernameOnlyProducesTimelineCommand () {
+        Command actual = CommandParser.parse("username");
+
+        Assert.assertTrue(actual instanceof TimelineCommand);
+    }
+    @Test
+    public void showUserTimeline () {
+        String expectedUsername = "username";
+        Command actual = CommandParser.parse(expectedUsername);
+
+        String actualUsername = actual.getUsername();
+        Assert.assertEquals(expectedUsername, actualUsername);
+    }
+
+    @Test
+    public void showOtherUsersTimeline() {
+        String expectedUsername = "otheruser";
+        Command actual = CommandParser.parse(expectedUsername);
+
+        String actualUsername = actual.getUsername();
+        Assert.assertEquals(expectedUsername, actualUsername);
+    }
+
+    
 }

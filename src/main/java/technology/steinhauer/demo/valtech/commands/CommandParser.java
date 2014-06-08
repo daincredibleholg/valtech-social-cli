@@ -5,6 +5,12 @@ package technology.steinhauer.demo.valtech.commands;
  */
 public class CommandParser {
     public static Command parse(String commandInput) {
-        return null;
+        Command result = null;
+        if (commandInput == "quit") {
+            result = new QuitCommand();
+        } else {
+            result = new TimelineCommand(commandInput);
+        }
+        return result;
     }
 }
