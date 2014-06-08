@@ -1,8 +1,14 @@
 package technology.steinhauer.demo.valtech;
 
+import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.units.JustNow;
+import org.ocpsoft.prettytime.units.Millisecond;
+import technology.steinhauer.demo.valtech.persistence.HibernateUtil;
+import technology.steinhauer.demo.valtech.persistence.PostManager;
 import technology.steinhauer.demo.valtech.text_device.CharacterTextDevice;
 import technology.steinhauer.demo.valtech.text_device.TextDevice;
 
@@ -19,14 +25,17 @@ public class PostPrinterTest {
 
     private StringWriter stringWriter;
 
-
     /**
      * Resets the PostPrinter and TimelineService before each test
      */
     @Before
     public void setUp() {
         PostPrinter.setTextDevice(null);
-        TimelineService.reset();
+
+        // Ensure that a Hibernate config for tests exists and do not use productive config!
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.createQuery("delete from Post").executeUpdate();
+        session.close();
     }
 
     @Test
@@ -41,7 +50,7 @@ public class PostPrinterTest {
         Date postDate = new Date();
 
         Post post = new Post(username, message, postDate);
-        TimelineService.addPost(post);
+        PostManager.savePost(post);
 
         PostPrinter.printTimeline(username);
 
@@ -68,20 +77,21 @@ public class PostPrinterTest {
         String firstMessage = "Oh, we lost!";
         Date firstPostDate = new Date();
         Post post = new Post(username, firstMessage, firstPostDate);
-        TimelineService.addPost(post);
+        PostManager.savePost(post);
 
         String secondMessage = "at least it's sunny";
         Date secondPostDate = new Date();
         post = new Post(username, secondMessage, secondPostDate);
-        TimelineService.addPost(post);
+        PostManager.savePost(post);
 
         PostPrinter.printTimeline(username);
 
-        String expectedValue = secondMessage + " (1 second ago)\n";
-        expectedValue += firstMessage + " (1 second ago)\n";
+        PrettyTime prettyTime = getPrettyTimeInstance();
+
+        String expectedValue = secondMessage + " (" + prettyTime.format(secondPostDate) + ")\n";
+        expectedValue += firstMessage + " (" + prettyTime.format(firstPostDate) + ")\n";
         String actualValue = stringWriter.getBuffer().toString();
         Assert.assertEquals(expectedValue, actualValue);
-
     }
 
     private TextDevice getTextDeviceForTest() {
@@ -90,5 +100,13 @@ public class PostPrinterTest {
         stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         return new CharacterTextDevice(reader, writer);
+    }
+
+    public PrettyTime getPrettyTimeInstance() {
+        PrettyTime prettyTime = new PrettyTime();
+
+        prettyTime.removeUnit(JustNow.class);
+        prettyTime.removeUnit(Millisecond.class);
+        return prettyTime;
     }
 }

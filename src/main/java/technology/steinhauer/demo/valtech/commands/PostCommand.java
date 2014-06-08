@@ -2,6 +2,7 @@ package technology.steinhauer.demo.valtech.commands;
 
 import technology.steinhauer.demo.valtech.Post;
 import technology.steinhauer.demo.valtech.TimelineService;
+import technology.steinhauer.demo.valtech.persistence.PostManager;
 
 import java.util.Date;
 
@@ -29,7 +30,7 @@ public class PostCommand extends Command {
 
         PostCommand that = (PostCommand) o;
 
-        //if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
         if (!username.equals(that.username)) return false;
 
@@ -47,6 +48,6 @@ public class PostCommand extends Command {
     @Override
     public void execute() {
         Post post = new Post(username, message, date);
-        TimelineService.addPost(post);
+        PostManager.savePost(post);
     }
 }

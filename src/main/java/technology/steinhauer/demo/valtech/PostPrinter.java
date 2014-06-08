@@ -3,6 +3,7 @@ package technology.steinhauer.demo.valtech;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
 import org.ocpsoft.prettytime.units.Millisecond;
+import technology.steinhauer.demo.valtech.persistence.PostManager;
 import technology.steinhauer.demo.valtech.text_device.TextDevice;
 import technology.steinhauer.demo.valtech.text_device.TextDeviceFactory;
 
@@ -39,7 +40,7 @@ public class PostPrinter {
         final String format = "%s (%s)%n";
         final PrettyTime prettyTime = getPrettyTimeInstance();
 
-        List<Post> userTimeline = TimelineService.getUserTimeline(username);
+        List<Post> userTimeline = PostManager.loadPosts(username);
 
         // we want the posts in descending order, so we simply reverse it
         Collections.reverse(userTimeline);
