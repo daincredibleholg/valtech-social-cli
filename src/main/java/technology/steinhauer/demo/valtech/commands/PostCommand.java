@@ -29,7 +29,7 @@ public class PostCommand extends Command {
 
         PostCommand that = (PostCommand) o;
 
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        //if (date != null ? !date.equals(that.date) : that.date != null) return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
         if (!username.equals(that.username)) return false;
 
