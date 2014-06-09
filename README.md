@@ -79,3 +79,5 @@ In addition, you will find code following these design patterns:
 * Command
 * Singleton
 * Adapter
+
+Beside raw git, I followed the git-flow branching model (http://nvie.com/posts/a-successful-git-branching-model/).
