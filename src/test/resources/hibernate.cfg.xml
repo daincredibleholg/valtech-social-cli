@@ -33,7 +33,6 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- Make hibernate less noisy -->
-        <property name="hibernate.show_sql">false</property>
         <property name="hibernate.generate_statistics">false</property>
         <property name="hibernate.use_sql_comments">false</property>
 

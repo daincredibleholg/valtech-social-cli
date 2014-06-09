@@ -3,7 +3,7 @@ package technology.steinhauer.demo.valtech.commands;
 import technology.steinhauer.demo.valtech.PostPrinter;
 
 /**
- * Created by hsteinhauer on 08.06.14.
+ * Represents the request to show a user's timeline.
  */
 public class TimelineCommand extends Command {
 

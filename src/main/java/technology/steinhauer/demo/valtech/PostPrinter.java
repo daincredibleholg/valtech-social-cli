@@ -43,14 +43,28 @@ public class PostPrinter {
 
         List<Post> userTimeline = PostManager.loadPosts(username);
 
-        // we want the posts in descending order, so we simply reverse it
-        Collections.reverse(userTimeline);
-
         for (Post post : userTimeline) {
             getTextDevice().printf(format, post.getMessage(), prettyTime.format(post.getDate()));
         }
     }
 
+    public static void printWall(String username) {
+        final String format = "%s - %s (%s)%n";
+        final PrettyTime prettyTime = getPrettyTimeInstance();
+
+        List<Post> userWall = PostManager.loadWallPosts(username);
+
+        for (Post post : userWall) {
+            getTextDevice().printf(format, post.getUsername(), post.getMessage(), prettyTime.format(post.getDate()));
+        }
+    }
+
+    /**
+     * Returns a preconfigured PrettyTime instance where the smallest unit is "second" (i.e. "1 second ago" is
+     * the smallest ago info available.)
+     *
+     * @return Preconfigured PrettyTime instance.
+     */
     private static PrettyTime getPrettyTimeInstance() {
         PrettyTime prettyTime = new PrettyTime();
         prettyTime.removeUnit(Millisecond.class);

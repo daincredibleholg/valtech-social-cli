@@ -37,9 +37,7 @@ public class PostPrinterTest {
 
     @Test
     public void testTimelineOutput() throws Exception {
-        // Prepare text device for test
-        TextDevice device = getTextDeviceForTest();
-        PostPrinter.setTextDevice(device);
+        preparePostPrinter();
 
         // Prepare post and "post it"
         String username = "Bob";
@@ -65,9 +63,7 @@ public class PostPrinterTest {
 
     @Test
     public void postsAreShownInReverseOrder() {
-        // Prepare text device for test
-        TextDevice device = getTextDeviceForTest();
-        PostPrinter.setTextDevice(device);
+        preparePostPrinter();
 
         // Prepare posts and "post them"
         String username = "Bob";
@@ -89,6 +85,39 @@ public class PostPrinterTest {
         expectedValue += firstMessage + " (" + prettyTime.format(firstPostDate) + ")\n";
         String actualValue = stringWriter.getBuffer().toString();
         Assert.assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void wallWithoutFollowingShowsPersonalPostsOnly() {
+        preparePostPrinter();
+
+        // we create and save two posts first
+        String username = "Bob";
+        Post firstPost = new Post(username, "Oh, we lost!", TestHelper.getYesterdaysDate());
+        Post secondPost = new Post(username, "at least it's sunny", new Date());
+        PostManager.savePost(firstPost);
+        PostManager.savePost(secondPost);
+
+        PostPrinter.printWall(username);
+
+        PrettyTime prettyTime = getPrettyTimeInstance();
+        String expectedValue = username + " - " + secondPost.getMessage() + " (" +
+                prettyTime.format(secondPost.getDate()) + ")\n";
+        expectedValue += username + " - " + firstPost.getMessage() + " (" +
+                prettyTime.format(firstPost.getDate()) + ")\n";
+
+        String actualValue = stringWriter.getBuffer().toString();
+
+        Assert.assertEquals(expectedValue, actualValue);
+
+    }
+
+    /**
+     * Initialises a testable, valid text device and set PostPrinter up to use it.
+     */
+    private void preparePostPrinter() {
+        TextDevice device = getTextDeviceForTest();
+        PostPrinter.setTextDevice(device);
     }
 
     /**

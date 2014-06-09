@@ -4,9 +4,11 @@ import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import technology.steinhauer.demo.valtech.entities.Follower;
 import technology.steinhauer.demo.valtech.entities.Post;
 import technology.steinhauer.demo.valtech.TestHelper;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -45,13 +47,58 @@ public class PostManagerTest {
     public void loadListOfPosts() {
         final int expectedPostListSize = 2;
         String username = "Bob";
-        Post firstPost =new Post(username, "Oh, we lost!", new Date());
+        Post firstPost =new Post(username, "Oh, we lost!", TestHelper.getYesterdaysDate());
         Post secondPost = new Post(username, "at least it's sunny", new Date());
         savePost(firstPost);
         savePost(secondPost);
 
         List<Post> posts = PostManager.loadPosts(username);
         Assert.assertEquals(expectedPostListSize, posts.size());
+    }
+
+    @Test
+    public void loadWallPostsWithoutFollowing() {
+        TestHelper.clearFollowerTable();
+
+        String username = "Bob";
+        // assume the first post were made yesterday...
+        Post firstPost =new Post(username, "Oh, we lost!", TestHelper.getYesterdaysDate());
+
+        // ... and the second post is just from now
+        Post secondPost = new Post(username, "at least it's sunny", new Date());
+        savePost(firstPost);
+        savePost(secondPost);
+
+        List<Post> posts = PostManager.loadWallPosts(username);
+
+        Assert.assertEquals(secondPost, posts.get(0));
+        Assert.assertEquals(firstPost, posts.get(1));
+    }
+
+    @Test
+    public void loadWallPostsWithFollowing() {
+        TestHelper.clearFollowerTable();
+
+        String username = "Bob";
+        String followee = "Alice";
+
+        // assume, Bob follows Alice
+        Follower follower = new Follower(username, followee);
+        FollowerManager.saveFollower(follower);
+
+        // also assume, Alice posted something yesterday
+        Post alicePost = new Post(followee, "I love the weather today", TestHelper.getYesterdaysDate());
+        savePost(alicePost);
+
+        // Bob posts something quite now
+        Post bobsPost = new Post(username, "Oh, we lost!", new Date());
+        savePost(bobsPost);
+
+        // now, check if we get both posts, in the correct order, on Bobs wall
+        List<Post> bobsWallPosts = PostManager.loadWallPosts(username);
+
+        Assert.assertEquals(bobsPost, bobsWallPosts.get(0));
+        Assert.assertEquals(alicePost, bobsWallPosts.get(1));
     }
 
     /**
