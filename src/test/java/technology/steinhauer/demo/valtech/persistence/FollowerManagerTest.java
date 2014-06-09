@@ -6,10 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import technology.steinhauer.demo.valtech.TestHelper;
 import technology.steinhauer.demo.valtech.entities.Follower;
-import technology.steinhauer.demo.valtech.entities.Post;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,7 +47,7 @@ public class FollowerManagerTest {
     public void loadListOfFollowees() {
         final int expectedPostListSize = 2;
         String follower = "Bob";
-        Follower firstPost =new Follower(follower, "Charlie");
+        Follower firstPost = new Follower(follower, "Charlie");
         Follower secondPost = new Follower(follower, "Alice");
         saveFollower(firstPost);
         saveFollower(secondPost);

@@ -7,9 +7,9 @@ import java.util.Scanner;
  * based on the given command line input.
  */
 public class CommandParser {
-    private static final String POST_COMMAND_STRING = "->";
-    private static final String FOLLOW_COMMAND_STRING = "follows";
-    private static final String WALL_COMMAND_STRING = "wall";
+    public static final String POST_COMMAND_STRING = "->";
+    public static final String FOLLOW_COMMAND_STRING = "follows";
+    public static final String WALL_COMMAND_STRING = "wall";
 
     /**
      * This method returns a Command based on commandInput. If no

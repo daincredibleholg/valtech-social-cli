@@ -8,7 +8,6 @@ import org.ocpsoft.prettytime.units.JustNow;
 import org.ocpsoft.prettytime.units.Millisecond;
 import technology.steinhauer.demo.valtech.TestHelper;
 import technology.steinhauer.demo.valtech.entities.Post;
-import technology.steinhauer.demo.valtech.output.PostPrinter;
 import technology.steinhauer.demo.valtech.persistence.PostManager;
 import technology.steinhauer.demo.valtech.text_device.CharacterTextDevice;
 import technology.steinhauer.demo.valtech.text_device.TextDevice;
