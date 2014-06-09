@@ -1,8 +1,15 @@
 package technology.steinhauer.demo.valtech;
 
+import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.ocpsoft.prettytime.PrettyTime;
+import org.ocpsoft.prettytime.units.JustNow;
+import org.ocpsoft.prettytime.units.Millisecond;
+import technology.steinhauer.demo.valtech.entities.Post;
+import technology.steinhauer.demo.valtech.persistence.HibernateUtil;
+import technology.steinhauer.demo.valtech.persistence.PostManager;
 import technology.steinhauer.demo.valtech.text_device.CharacterTextDevice;
 import technology.steinhauer.demo.valtech.text_device.TextDevice;
 
@@ -19,21 +26,18 @@ public class PostPrinterTest {
 
     private StringWriter stringWriter;
 
-
     /**
-     * Resets the PostPrinter and TimelineService before each test
+     * Resets the PostPrinter text device and the Post DB table before each test
      */
     @Before
     public void setUp() {
         PostPrinter.setTextDevice(null);
-        TimelineService.reset();
+        TestHelper.clearPostTable();
     }
 
     @Test
     public void testTimelineOutput() throws Exception {
-        // Prepare text device for test
-        TextDevice device = getTextDeviceForTest();
-        PostPrinter.setTextDevice(device);
+        preparePostPrinter();
 
         // Prepare post and "post it"
         String username = "Bob";
@@ -41,7 +45,7 @@ public class PostPrinterTest {
         Date postDate = new Date();
 
         Post post = new Post(username, message, postDate);
-        TimelineService.addPost(post);
+        PostManager.savePost(post);
 
         PostPrinter.printTimeline(username);
 
@@ -59,36 +63,88 @@ public class PostPrinterTest {
 
     @Test
     public void postsAreShownInReverseOrder() {
-        // Prepare text device for test
-        TextDevice device = getTextDeviceForTest();
-        PostPrinter.setTextDevice(device);
+        preparePostPrinter();
 
         // Prepare posts and "post them"
         String username = "Bob";
         String firstMessage = "Oh, we lost!";
         Date firstPostDate = new Date();
         Post post = new Post(username, firstMessage, firstPostDate);
-        TimelineService.addPost(post);
+        PostManager.savePost(post);
 
         String secondMessage = "at least it's sunny";
         Date secondPostDate = new Date();
         post = new Post(username, secondMessage, secondPostDate);
-        TimelineService.addPost(post);
+        PostManager.savePost(post);
 
         PostPrinter.printTimeline(username);
 
-        String expectedValue = secondMessage + " (1 second ago)\n";
-        expectedValue += firstMessage + " (1 second ago)\n";
+        PrettyTime prettyTime = getPrettyTimeInstance();
+
+        String expectedValue = secondMessage + " (" + prettyTime.format(secondPostDate) + ")\n";
+        expectedValue += firstMessage + " (" + prettyTime.format(firstPostDate) + ")\n";
         String actualValue = stringWriter.getBuffer().toString();
+        Assert.assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void wallWithoutFollowingShowsPersonalPostsOnly() {
+        preparePostPrinter();
+
+        // we create and save two posts first
+        String username = "Bob";
+        Post firstPost = new Post(username, "Oh, we lost!", TestHelper.getYesterdaysDate());
+        Post secondPost = new Post(username, "at least it's sunny", new Date());
+        PostManager.savePost(firstPost);
+        PostManager.savePost(secondPost);
+
+        PostPrinter.printWall(username);
+
+        PrettyTime prettyTime = getPrettyTimeInstance();
+        String expectedValue = username + " - " + secondPost.getMessage() + " (" +
+                prettyTime.format(secondPost.getDate()) + ")\n";
+        expectedValue += username + " - " + firstPost.getMessage() + " (" +
+                prettyTime.format(firstPost.getDate()) + ")\n";
+
+        String actualValue = stringWriter.getBuffer().toString();
+
         Assert.assertEquals(expectedValue, actualValue);
 
     }
 
+    /**
+     * Initialises a testable, valid text device and set PostPrinter up to use it.
+     */
+    private void preparePostPrinter() {
+        TextDevice device = getTextDeviceForTest();
+        PostPrinter.setTextDevice(device);
+    }
+
+    /**
+     * Initialises and returns a CharacterTextDevice.
+     * Use the stringWriter member variable to get output for test.
+     *
+     * @return Configured CharacterTextDevice
+     */
     private TextDevice getTextDeviceForTest() {
         StringReader stringReader = new StringReader("demo");
         BufferedReader reader = new BufferedReader(stringReader);
         stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
         return new CharacterTextDevice(reader, writer);
+    }
+
+    /**
+     * Returns a PrettyTime instance without the time units "JustNow" and "Milliseconds", so the smallest
+     * unit, used for "xy UNIT ago" is UNIT = second.
+     *
+     * @return Preconfigured PrettyTime instance
+     */
+    private PrettyTime getPrettyTimeInstance() {
+        PrettyTime prettyTime = new PrettyTime();
+
+        prettyTime.removeUnit(JustNow.class);
+        prettyTime.removeUnit(Millisecond.class);
+        return prettyTime;
     }
 }

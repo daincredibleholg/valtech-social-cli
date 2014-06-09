@@ -29,11 +29,11 @@ public class CommandParserTest {
         String username = "username";
         String message = "demo";
         String command = username + " -> " + message;
-        PostCommand expectedCommand = new PostCommand(username, message);
 
         Command actualCommand = CommandParser.parse(command);
 
-        Assert.assertEquals(expectedCommand, actualCommand);
+        Assert.assertEquals(username, actualCommand.getUsername());
+        Assert.assertEquals(message, ((PostCommand) actualCommand).getMessage());
     }
 
     @Test

@@ -1,16 +1,9 @@
 package technology.steinhauer.demo.valtech.commands;
 
-import technology.steinhauer.demo.valtech.Post;
 import technology.steinhauer.demo.valtech.PostPrinter;
-import technology.steinhauer.demo.valtech.TimelineService;
-import technology.steinhauer.demo.valtech.text_device.TextDevice;
-import technology.steinhauer.demo.valtech.text_device.TextDeviceFactory;
-
-import java.util.Date;
-import java.util.List;
 
 /**
- * Created by hsteinhauer on 08.06.14.
+ * Represents the request to show a user's timeline.
  */
 public class TimelineCommand extends Command {
 

@@ -1,4 +1,4 @@
-package technology.steinhauer.demo.valtech;
+package technology.steinhauer.demo.valtech.entities;
 
 import java.util.Date;
 
@@ -7,9 +7,18 @@ import java.util.Date;
  * As per the current requirements, a post is immutable because there is no post editing required by the "customer".
  */
 public class Post {
-    private final String message;
-    private final String username;
-    private final Date date;
+
+    private int id;
+    private String message;
+    private String username;
+    private Date date;
+
+    /**
+     * Default constructor, needed for hibernate mapping.
+     */
+    public Post() {
+    }
+
 
     public Post(String username, String message, Date date) {
         this.username = username;
@@ -20,13 +29,31 @@ public class Post {
     public String getUsername() {
         return username;
     }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getMessage() {
         return message;
     }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public Date getDate() {
         return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
