@@ -36,6 +36,7 @@
     </build>
 
     <dependencies>
+
         <!-- PrettyTime is used for '<times> ago' output... -->
         <dependency>
             <groupId>org.ocpsoft.prettytime</groupId>
@@ -55,6 +56,18 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>4.3.5.Final</version>
+        </dependency>
+
+        <!-- Logging facilities - mainly needed to configure hibernate logging -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.7</version>
         </dependency>
 
         <!-- Testing dependencies -->
