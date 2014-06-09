@@ -1,15 +1,25 @@
 package technology.steinhauer.demo.valtech.commands;
 
+import technology.steinhauer.demo.valtech.entities.Follower;
+import technology.steinhauer.demo.valtech.persistence.FollowerManager;
+
 /**
- * Created by hsteinhauer on 08.06.14.
+ * This commmand encapsulates the command line input "<follower> follows <followee>".
+ *
  */
 public class FollowCommand extends Command {
 
-    private final String follow;
+    private final String followee;
 
-    public FollowCommand(String username, String follow) {
+    public FollowCommand(String username, String followee) {
         this.username = username;
-        this.follow = follow;
+        this.followee = followee;
+    }
+
+    @Override
+    public void execute() {
+        Follower follower = new Follower(username, followee);
+        FollowerManager.saveFollower(follower);
     }
 
     @Override
@@ -19,7 +29,7 @@ public class FollowCommand extends Command {
 
         FollowCommand that = (FollowCommand) o;
 
-        if (!follow.equals(that.follow)) return false;
+        if (!followee.equals(that.followee)) return false;
         if (!username.equals(that.username)) return false;
 
         return true;
@@ -27,13 +37,8 @@ public class FollowCommand extends Command {
 
     @Override
     public int hashCode() {
-        int result = follow.hashCode();
+        int result = followee.hashCode();
         result = 31 * result + username.hashCode();
         return result;
-    }
-
-    @Override
-    public void execute() {
-
     }
 }

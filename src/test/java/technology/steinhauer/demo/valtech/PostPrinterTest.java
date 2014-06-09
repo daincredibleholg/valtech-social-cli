@@ -27,16 +27,12 @@ public class PostPrinterTest {
     private StringWriter stringWriter;
 
     /**
-     * Resets the PostPrinter and TimelineService before each test
+     * Resets the PostPrinter text device and the Post DB table before each test
      */
     @Before
     public void setUp() {
         PostPrinter.setTextDevice(null);
-
-        // Ensure that a Hibernate config for tests exists and do not use productive config!
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.createQuery("delete from Post").executeUpdate();
-        session.close();
+        TestHelper.clearPostTable();
     }
 
     @Test
@@ -95,6 +91,12 @@ public class PostPrinterTest {
         Assert.assertEquals(expectedValue, actualValue);
     }
 
+    /**
+     * Initialises and returns a CharacterTextDevice.
+     * Use the stringWriter member variable to get output for test.
+     *
+     * @return Configured CharacterTextDevice
+     */
     private TextDevice getTextDeviceForTest() {
         StringReader stringReader = new StringReader("demo");
         BufferedReader reader = new BufferedReader(stringReader);
@@ -103,7 +105,13 @@ public class PostPrinterTest {
         return new CharacterTextDevice(reader, writer);
     }
 
-    public PrettyTime getPrettyTimeInstance() {
+    /**
+     * Returns a PrettyTime instance without the time units "JustNow" and "Milliseconds", so the smallest
+     * unit, used for "xy UNIT ago" is UNIT = second.
+     *
+     * @return Preconfigured PrettyTime instance
+     */
+    private PrettyTime getPrettyTimeInstance() {
         PrettyTime prettyTime = new PrettyTime();
 
         prettyTime.removeUnit(JustNow.class);
