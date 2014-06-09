@@ -13,6 +13,10 @@
         <powermock.version>1.5.4</powermock.version>
     </properties>
 
+    <scm>
+        <developerConnection>scm:git:git@github.com:daincredibleholg/valtech-social-cli.git</developerConnection>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
