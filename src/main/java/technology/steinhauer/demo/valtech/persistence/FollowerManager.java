@@ -7,7 +7,7 @@ import technology.steinhauer.demo.valtech.entities.Follower;
 import java.util.List;
 
 /**
- * Created by hsteinhauer on 09.06.14.
+ * Provides load and save methods needed to maintain follower-followee relationships in the DB.
  */
 public class FollowerManager {
     /**

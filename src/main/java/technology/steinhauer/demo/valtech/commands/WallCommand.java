@@ -1,6 +1,6 @@
 package technology.steinhauer.demo.valtech.commands;
 
-import technology.steinhauer.demo.valtech.PostPrinter;
+import technology.steinhauer.demo.valtech.output.PostPrinter;
 
 /**
  * Represents the command to show a wall of a specific user.

@@ -59,10 +59,25 @@ public class CommandParser {
         return result;
     }
 
+    /**
+     * A wall was requested for the given user.
+     *
+     * @param username The user, the wall was requested for.
+     * @return Corresponding WallCommand
+     */
     private static Command createWallCommand(String username) {
         return new WallCommand(username);
     }
 
+    /**
+     * The provided user will follow somebody. This method parses the rest of the
+     * input to extract the followee's username and returns the corresponding
+     * FollowCommand.
+     *
+     * @param commandScanner Scanner instance that was also used to get the username.
+     * @param username The follower's username.
+     * @return The corresponding FollowCommand
+     */
     private static Command createFollowCommand(Scanner commandScanner, String username) {
         Command followCommand = null;
 
@@ -75,6 +90,16 @@ public class CommandParser {
         return followCommand;
     }
 
+    /**
+     * The given user will post something. This method creates the corresponding PostCommand by extracting
+     * the message from the given input.
+     * The extraction is done by removing the username and the command part {@link CommandParser#POST_COMMAND_STRING}
+     * from the beginning of the input string (commandInput).
+     *
+     * @param commandInput The complete input string from the command line
+     * @param username The user who wants to post
+     * @return The corresponding PostCommand
+     */
     private static Command createPostCommand(String commandInput, String username) {
         Command postCommand;
         final int numberOfUsedSpaces = 2;

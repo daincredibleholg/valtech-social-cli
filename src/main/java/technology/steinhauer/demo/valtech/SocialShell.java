@@ -25,6 +25,7 @@ public class SocialShell {
             startCommandLoop(device);
         } catch (Exception e) {
             System.err.println("Following error occurred: [" + e.getMessage() + "]");
+            System.exit(1);
         }
     }
 

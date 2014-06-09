@@ -1,13 +1,13 @@
 package technology.steinhauer.demo.valtech.persistence;
 
-/**
- * Simple utility to get a valid Hibernate session.
- * This code is based on https://docs.jboss.org/hibernate/core/4.3/quickstart/en-US/html_single.
- */
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * Simple utility to get a valid Hibernate session.
+ * This code is based on https://docs.jboss.org/hibernate/core/4.3/quickstart/en-US/html_single.
+ */
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();

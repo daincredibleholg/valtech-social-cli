@@ -1,4 +1,4 @@
-package technology.steinhauer.demo.valtech;
+package technology.steinhauer.demo.valtech.output;
 
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
@@ -8,7 +8,6 @@ import technology.steinhauer.demo.valtech.persistence.PostManager;
 import technology.steinhauer.demo.valtech.text_device.TextDevice;
 import technology.steinhauer.demo.valtech.text_device.TextDeviceFactory;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,6 +20,13 @@ public class PostPrinter {
         PostPrinter.textDevice = textDevice;
     }
 
+    /**
+     * Returns the set text device instance or, if no instance
+     * is available yet, looks up for the TextDevice, the application
+     * is currently using, and returns it-
+     *
+     * @return The TextDevice instance to interact with user.
+     */
     public static TextDevice getTextDevice() {
         if (textDevice == null) {
             initTextDevice();
@@ -29,14 +35,29 @@ public class PostPrinter {
         return textDevice;
     }
 
+    /**
+     * Tries to lookup the TextDevice, used for this application instance.
+     * If anything goes wrong, it prints an error message to STDERR and
+     * quits the applicaton with exit code 1.
+     */
     private static void initTextDevice() {
         try {
             textDevice = TextDeviceFactory.createTextDevice();
         } catch (Exception e) {
             System.err.println("Unable to lookup workable text device for PostPrinter.");
+            System.exit(1);
         }
     }
 
+    /**
+     * Prints all posts, made by the user with the given username, to the
+     * text device.
+     *
+     * The output will look like this:
+     *      This is my post (2 minutes ago)
+     *
+     * @param username User, you want the timeline for.
+     */
     public static void printTimeline(String username) {
         final String format = "%s (%s)%n";
         final PrettyTime prettyTime = getPrettyTimeInstance();
@@ -48,6 +69,16 @@ public class PostPrinter {
         }
     }
 
+    /**
+     * Prints all posts from the given user and the users, the given user
+     * is following at the moment, to the current text device.
+     *
+     * The output will loke like this:
+     *      DemoUser - This is my post (2 minutes ago)
+     *      InterestingPoster - Really interesting post (1 hour ago)
+     *
+     * @param username
+     */
     public static void printWall(String username) {
         final String format = "%s - %s (%s)%n";
         final PrettyTime prettyTime = getPrettyTimeInstance();
@@ -60,10 +91,10 @@ public class PostPrinter {
     }
 
     /**
-     * Returns a preconfigured PrettyTime instance where the smallest unit is "second" (i.e. "1 second ago" is
+     * Returns a pre-configured PrettyTime instance where the smallest unit is "second" (i.e. "1 second ago" is
      * the smallest ago info available.)
      *
-     * @return Preconfigured PrettyTime instance.
+     * @return Pre-configured PrettyTime instance.
      */
     private static PrettyTime getPrettyTimeInstance() {
         PrettyTime prettyTime = new PrettyTime();

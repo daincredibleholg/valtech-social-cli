@@ -2,6 +2,9 @@ package technology.steinhauer.demo.valtech.entities;
 
 /**
  * Represents a follower-followee relationship, needed for following scenario.
+ *
+ * The needed Hibernate mappings can be found in
+ * resources/technology/steinhauer/demo/valtech/entities/Follower.hbm.xml.
  */
 public class Follower {
 

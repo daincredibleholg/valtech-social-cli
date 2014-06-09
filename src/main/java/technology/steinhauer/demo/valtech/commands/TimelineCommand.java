@@ -1,6 +1,6 @@
 package technology.steinhauer.demo.valtech.commands;
 
-import technology.steinhauer.demo.valtech.PostPrinter;
+import technology.steinhauer.demo.valtech.output.PostPrinter;
 
 /**
  * Represents the request to show a user's timeline.
