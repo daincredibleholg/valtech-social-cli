@@ -31,11 +31,11 @@ mvn clean install exec:java
 The following commands are available:
 
 | What                 | Syntax                        | Example               |
-________________________________________________________________________________
-| Show user's timeline | <username>                    | Alice                 |
-| Show user's wall     | <username> wall               | Bob wall              |
-| Post                 | <username> -> <message>       | Bob -> Oh, we lost!   |
-| Follow a user        | <username> follows <followee> | Alice follows Charlie |
+|----------------------|-------------------------------|-----------------------|
+| Show user's timeline | [username]                    | Alice                 |
+| Show user's wall     | [username] wall               | Bob wall              |
+| Post                 | [username] -> [message]       | Bob -> Oh, we lost!   |
+| Follow a user        | [username] follows [followee] | Alice follows Charlie |
 | Quit the application | quit                          | quit                  |
 
 # Examples
