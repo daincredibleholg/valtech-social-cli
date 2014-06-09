@@ -4,7 +4,7 @@ import technology.steinhauer.demo.valtech.entities.Follower;
 import technology.steinhauer.demo.valtech.persistence.FollowerManager;
 
 /**
- * This commmand encapsulates the command line input "<follower> follows <followee>".
+ * This commmand encapsulates the command line input "[follower] follows [followee]".
  *
  */
 public class FollowCommand extends Command {

@@ -77,7 +77,7 @@ public class PostPrinter {
      *      DemoUser - This is my post (2 minutes ago)
      *      InterestingPoster - Really interesting post (1 hour ago)
      *
-     * @param username
+     * @param username The user, you want the wall posts for.
      */
     public static void printWall(String username) {
         final String format = "%s - %s (%s)%n";
