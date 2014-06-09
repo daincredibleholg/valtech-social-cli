@@ -17,4 +17,10 @@ public class TestHelper {
         session.createQuery("delete from Post").executeUpdate();
         session.close();
     }
+
+    public static void clearFollowerTable() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.createQuery("delete from Follower").executeUpdate();
+        session.close();
+    }
 }

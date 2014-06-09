@@ -4,14 +4,14 @@ import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import technology.steinhauer.demo.valtech.Post;
+import technology.steinhauer.demo.valtech.entities.Post;
 import technology.steinhauer.demo.valtech.TestHelper;
 
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by hsteinhauer on 09.06.14.
+ * Tests the PostManager class.
  */
 public class PostManagerTest {
 

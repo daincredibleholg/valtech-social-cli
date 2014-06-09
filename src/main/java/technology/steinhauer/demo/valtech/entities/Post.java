@@ -1,4 +1,4 @@
-package technology.steinhauer.demo.valtech;
+package technology.steinhauer.demo.valtech.entities;
 
 import java.util.Date;
 

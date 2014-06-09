@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
 import org.ocpsoft.prettytime.units.Millisecond;
+import technology.steinhauer.demo.valtech.entities.Post;
 import technology.steinhauer.demo.valtech.persistence.HibernateUtil;
 import technology.steinhauer.demo.valtech.persistence.PostManager;
 import technology.steinhauer.demo.valtech.text_device.CharacterTextDevice;

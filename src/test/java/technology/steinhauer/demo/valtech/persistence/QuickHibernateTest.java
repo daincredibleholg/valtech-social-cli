@@ -3,7 +3,7 @@ package technology.steinhauer.demo.valtech.persistence;
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;
-import technology.steinhauer.demo.valtech.Post;
+import technology.steinhauer.demo.valtech.entities.Post;
 
 import java.util.Date;
 import java.util.List;

@@ -3,6 +3,7 @@ package technology.steinhauer.demo.valtech;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;
 import org.ocpsoft.prettytime.units.Millisecond;
+import technology.steinhauer.demo.valtech.entities.Post;
 import technology.steinhauer.demo.valtech.persistence.PostManager;
 import technology.steinhauer.demo.valtech.text_device.TextDevice;
 import technology.steinhauer.demo.valtech.text_device.TextDeviceFactory;

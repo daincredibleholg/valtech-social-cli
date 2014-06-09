@@ -1,7 +1,6 @@
 package technology.steinhauer.demo.valtech.commands;
 
-import technology.steinhauer.demo.valtech.Post;
-import technology.steinhauer.demo.valtech.TimelineService;
+import technology.steinhauer.demo.valtech.entities.Post;
 import technology.steinhauer.demo.valtech.persistence.PostManager;
 
 import java.util.Date;

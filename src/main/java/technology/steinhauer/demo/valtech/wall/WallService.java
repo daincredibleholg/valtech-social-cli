@@ -1,6 +1,6 @@
 package technology.steinhauer.demo.valtech.wall;
 
-import technology.steinhauer.demo.valtech.Post;
+import technology.steinhauer.demo.valtech.entities.Post;
 
 import java.util.HashMap;
 import java.util.LinkedList;

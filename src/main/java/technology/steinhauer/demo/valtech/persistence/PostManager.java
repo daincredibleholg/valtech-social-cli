@@ -2,7 +2,7 @@ package technology.steinhauer.demo.valtech.persistence;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import technology.steinhauer.demo.valtech.Post;
+import technology.steinhauer.demo.valtech.entities.Post;
 
 import java.util.List;
 

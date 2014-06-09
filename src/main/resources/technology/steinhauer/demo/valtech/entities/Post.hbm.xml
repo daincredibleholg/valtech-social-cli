@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="technology.steinhauer.demo.valtech">
+    <class name="technology.steinhauer.demo.valtech.entities.Post" table="POSTS">
+        <id name="id" column="ID">
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator" />
+        </id>
+        <property name="username" index="IDX_USERNAME"  />
+        <property name="date" type="timestamp" column="POST_DATE" />
+        <property name="message" />
+    </class>
+</hibernate-mapping>
