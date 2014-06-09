@@ -9,13 +9,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <powermock.version>1.5.4</powermock.version>
     </properties>
-
-    <scm>
-        <developerConnection>scm:git:git@github.com:daincredibleholg/valtech-social-cli.git</developerConnection>
-    </scm>
 
     <build>
         <plugins>
@@ -36,17 +30,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <tagNameFormat>v@{project.version}</tagNameFormat>
-                    <pushChanges>false</pushChanges>
-                    <localCheckout>true</localCheckout>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 
