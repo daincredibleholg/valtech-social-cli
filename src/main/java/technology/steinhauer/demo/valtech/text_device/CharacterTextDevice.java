@@ -6,7 +6,9 @@ import java.io.PrintWriter;
 import java.io.Reader;
 
 /**
- * Created by hsteinhauer on 07.06.14.
+ * This implementation of TextDevice is mainly needed for the automated
+ * tests, where no Console is available. Beside that, it is a good
+ * fallback for OSes not supporting Java's Console feature.
  */
 public class CharacterTextDevice implements TextDevice {
 

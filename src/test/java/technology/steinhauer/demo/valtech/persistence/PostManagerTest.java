@@ -4,11 +4,10 @@ import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import technology.steinhauer.demo.valtech.TestHelper;
 import technology.steinhauer.demo.valtech.entities.Follower;
 import technology.steinhauer.demo.valtech.entities.Post;
-import technology.steinhauer.demo.valtech.TestHelper;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class PostManagerTest {
     public void loadListOfPosts() {
         final int expectedPostListSize = 2;
         String username = "Bob";
-        Post firstPost =new Post(username, "Oh, we lost!", TestHelper.getYesterdaysDate());
+        Post firstPost = new Post(username, "Oh, we lost!", TestHelper.getYesterdaysDate());
         Post secondPost = new Post(username, "at least it's sunny", new Date());
         savePost(firstPost);
         savePost(secondPost);
@@ -62,7 +61,7 @@ public class PostManagerTest {
 
         String username = "Bob";
         // assume the first post were made yesterday...
-        Post firstPost =new Post(username, "Oh, we lost!", TestHelper.getYesterdaysDate());
+        Post firstPost = new Post(username, "Oh, we lost!", TestHelper.getYesterdaysDate());
 
         // ... and the second post is just from now
         Post secondPost = new Post(username, "at least it's sunny", new Date());

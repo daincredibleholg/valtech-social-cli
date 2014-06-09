@@ -5,7 +5,11 @@ import java.io.PrintWriter;
 import java.io.Reader;
 
 /**
- * Created by hsteinhauer on 07.06.14.
+ * During automated tests, in IDEs and on some rare operating systems
+ * is no Console support available. Therefor a small indirection layer
+ * was implemented, providing the needed Console methods also, if there
+ * is no Console support.
+ *
  */
 public interface TextDevice {
 
@@ -30,7 +34,7 @@ public interface TextDevice {
      * format and writes it to the text device.
      *
      * @param format Format instructions for the given values
-     * @param numberToFormat Values to format and print
+     * @param values Values to format and print
      */
     void printf(String format, Object... values);
 
@@ -43,7 +47,20 @@ public interface TextDevice {
      */
     String readLine() throws IOException;
 
+    /**
+     * Same as {@link TextDevice#readLine()} but lets you display
+     * a short prompt in front of the input line.
+     *
+     * @param prompt Prompt to show
+     * @return The input we got
+     * @throws IOException Thrown in case of an IO problem.
+     */
     String readLine(String prompt) throws IOException;
 
+    /**
+     * Prints out the given string to the console.
+     *
+     * @param s String to show
+     */
     void println(String s);
 }

@@ -23,6 +23,12 @@ public class PostCommand extends Command {
     }
 
     @Override
+    public void execute() {
+        Post post = new Post(username, message, date);
+        PostManager.savePost(post);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -42,11 +48,5 @@ public class PostCommand extends Command {
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public void execute() {
-        Post post = new Post(username, message, date);
-        PostManager.savePost(post);
     }
 }

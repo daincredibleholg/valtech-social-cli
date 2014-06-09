@@ -4,7 +4,9 @@ import java.util.Date;
 
 /**
  * Represents one post, made by a specific user.
- * As per the current requirements, a post is immutable because there is no post editing required by the "customer".
+ *
+ * The needed Hibernate mappings can be found in
+ * resources/technology/steinhauer/demo/valtech/entities/Follower.hbm.xml.
  */
 public class Post {
 
@@ -16,9 +18,7 @@ public class Post {
     /**
      * Default constructor, needed for hibernate mapping.
      */
-    public Post() {
-    }
-
+    public Post() { }
 
     public Post(String username, String message, Date date) {
         this.username = username;

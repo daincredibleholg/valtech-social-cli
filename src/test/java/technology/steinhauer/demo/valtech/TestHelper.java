@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by hsteinhauer on 09.06.14.
+ * Small helper class for logic needed in more than one test case.
  */
 public class TestHelper {
 

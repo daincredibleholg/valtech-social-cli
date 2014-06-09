@@ -6,7 +6,8 @@ import java.io.PrintWriter;
 import java.io.Reader;
 
 /**
- * Created by hsteinhauer on 07.06.14.
+ * More or less an adapter for Java's Console and part of the small indirection layer
+ * implemented to make automatic testing possible.
  */
 public class ConsoleTextDevice implements TextDevice {
     private Console console;
