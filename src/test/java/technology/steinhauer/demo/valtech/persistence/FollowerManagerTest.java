@@ -55,7 +55,7 @@ public class FollowerManagerTest {
         saveFollower(firstPost);
         saveFollower(secondPost);
 
-        List<Follower> followee = FollowerManager.loadFollowers(follower);
+        List<Follower> followee = FollowerManager.loadFollower(follower);
         Assert.assertEquals(expectedPostListSize, followee.size());
     }
 
