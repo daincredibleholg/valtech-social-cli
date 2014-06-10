@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Tests the PostPrinter utility
@@ -48,7 +49,9 @@ public class PostPrinterTest {
 
         PostPrinter.printTimeline(username);
 
-        String expectedValue = message + " (1 second ago)\n";
+        PrettyTime prettyTime = getPrettyTimeInstance();
+
+        String expectedValue = message + " (" + prettyTime.format(postDate) + ")" + System.lineSeparator();
         String actualValue = stringWriter.getBuffer().toString();
         Assert.assertEquals(expectedValue, actualValue);
     }
@@ -80,8 +83,8 @@ public class PostPrinterTest {
 
         PrettyTime prettyTime = getPrettyTimeInstance();
 
-        String expectedValue = secondMessage + " (" + prettyTime.format(secondPostDate) + ")\n";
-        expectedValue += firstMessage + " (" + prettyTime.format(firstPostDate) + ")\n";
+        String expectedValue = secondMessage + " (" + prettyTime.format(secondPostDate) + ")" + System.lineSeparator();
+        expectedValue += firstMessage + " (" + prettyTime.format(firstPostDate) + ")" + System.lineSeparator();
         String actualValue = stringWriter.getBuffer().toString();
         Assert.assertEquals(expectedValue, actualValue);
     }
@@ -101,9 +104,9 @@ public class PostPrinterTest {
 
         PrettyTime prettyTime = getPrettyTimeInstance();
         String expectedValue = username + " - " + secondPost.getMessage() + " (" +
-                prettyTime.format(secondPost.getDate()) + ")\n";
+                prettyTime.format(secondPost.getDate()) + ")" + System.lineSeparator();
         expectedValue += username + " - " + firstPost.getMessage() + " (" +
-                prettyTime.format(firstPost.getDate()) + ")\n";
+                prettyTime.format(firstPost.getDate()) + ")" + System.lineSeparator();
 
         String actualValue = stringWriter.getBuffer().toString();
 
