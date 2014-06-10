@@ -68,7 +68,7 @@ public class CharacterTextDeviceTest {
         device.println("Line 1");
         device.println("Line 2");
 
-        String expectedValue = "Line 1\nLine 2\n";
+        String expectedValue = "Line 1" + System.lineSeparator() + "Line 2" + System.lineSeparator();
         String actualValue = stringWriter.getBuffer().toString();
         Assert.assertEquals(expectedValue, actualValue);
     }
